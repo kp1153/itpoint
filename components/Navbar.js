@@ -42,10 +42,17 @@ export default function Navbar() {
   return (
     <nav className="bg-[#006680] text-white">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Header Section */}
+        {/* Header Section with Logo */}
         <div className="py-4 text-center border-b border-white/20">
-          <Link href="/">
-            <h1 className="text-2xl md:text-3xl font-bold mb-1">IT POINT</h1>
+          <Link href="/" className="flex flex-col items-center">
+            <div className="flex items-center gap-3 mb-1">
+              <img
+                src="/logo.png"
+                alt="IT Point Logo"
+                className="h-10 md:h-12 w-auto"
+              />
+              <h1 className="text-2xl md:text-3xl font-bold">IT POINT</h1>
+            </div>
             <p className="text-sm md:text-base text-gray-200">
               Your Trusted Computer & Laptop Shop with Repair Services
             </p>
