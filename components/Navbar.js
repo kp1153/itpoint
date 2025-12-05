@@ -46,8 +46,6 @@ export default function Navbar() {
         <div className="py-4 text-center border-b border-white/20">
           <Link href="/">
             <img src="/logo.png" alt="IT Point Logo" className="mx-auto" />
-            
-          
           </Link>
         </div>
 
@@ -212,14 +210,6 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   About Us
-                </Link>
-
-                <Link
-                  href="#contact"
-                  className="text-lg font-medium text-gray-800 hover:text-[#006680]"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Contact
                 </Link>
               </div>
             </SheetContent>
