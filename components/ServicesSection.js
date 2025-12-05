@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Wrench,
   Shield,
@@ -15,6 +16,7 @@ export default function ServicesSection() {
       description:
         "Complete installation and configuration of laptops, desktops, printers, and CCTV systems for seamless operation",
       features: ["OS Installation", "Driver Setup", "Network Configuration"],
+      image: "/services/1.jpeg",
     },
     {
       icon: Wrench,
@@ -26,6 +28,7 @@ export default function ServicesSection() {
         "Software Troubleshooting",
         "Virus Removal",
       ],
+      image: "/services/2.jpeg",
     },
     {
       icon: RefreshCw,
@@ -78,35 +81,49 @@ export default function ServicesSection() {
             return (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
               >
-                {/* Icon */}
-                <div className="w-16 h-16 bg-[#006680] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Icon className="w-8 h-8 text-white" />
+                {/* Image (if exists) */}
+                {service.image && (
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
+
+                <div className="p-6">
+                  {/* Icon */}
+                  <div className="w-16 h-16 bg-[#006680] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  {/* Features */}
+                  <ul className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-center text-sm text-gray-700"
+                      >
+                        <span className="w-1.5 h-1.5 bg-[#006680] rounded-full mr-2"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {service.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  {service.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-center text-sm text-gray-700"
-                    >
-                      <span className="w-1.5 h-1.5 bg-[#006680] rounded-full mr-2"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
               </div>
             );
           })}
@@ -122,12 +139,20 @@ export default function ServicesSection() {
             From installation to troubleshooting, we've got you covered.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-[#006680] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-semibold">
+            <a
+              href="tel:+919336486071"
+              className="bg-white text-[#006680] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+            >
               Call Now
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-[#006680] transition-colors font-semibold">
+            </a>
+            <a
+              href="https://wa.me/919336486071"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-[#006680] transition-colors font-semibold"
+            >
               WhatsApp Us
-            </button>
+            </a>
           </div>
         </div>
       </div>
