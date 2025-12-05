@@ -22,6 +22,19 @@ export default function Navbar() {
     { title: "About Us", href: "#about" },
   ];
 
+  /* ✅ सही जगह: handlePayment को यहाँ रखना था */
+  const handlePayment = () => {
+    const options = {
+      key: "YOUR_KEY_ID",
+      amount: 10000,
+      currency: "INR",
+      name: "IT Point",
+      description: "Test Payment",
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setIsOpen(false);
@@ -94,6 +107,15 @@ export default function Navbar() {
                       {link.title}
                     </a>
                   ))}
+
+                  {/* Mobile: Pay Now Button */}
+                  <button
+                    onClick={handlePayment}
+                    className="w-full px-4 py-2 bg-[#006680] text-white rounded text-sm"
+                  >
+                    Pay Now
+                  </button>
+
                   <div className="pt-4 border-t">
                     <button className="w-full px-4 py-2 bg-[#006680] text-white rounded text-sm">
                       EN / HI
@@ -120,6 +142,15 @@ export default function Navbar() {
                 </a>
               ))}
             </div>
+
+            {/* Desktop: Pay Now Button */}
+            <button
+              onClick={handlePayment}
+              className="px-4 py-1 bg-[#006680] text-white rounded text-sm"
+            >
+              Pay Now
+            </button>
+
             <button className="px-4 py-1 bg-white/10 hover:bg-white/20 rounded text-sm transition-colors">
               EN / HI
             </button>
