@@ -46,7 +46,7 @@ export default function Navbar() {
 
     const element = document.querySelector(href);
     if (element) {
-      const navHeight = 140; // बढ़ा दिया
+      const navHeight = 160; // बढ़ा दिया
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
