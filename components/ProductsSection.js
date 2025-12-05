@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   Monitor,
   Laptop,
@@ -18,13 +17,16 @@ export default function ProductsSection() {
       description: "HP, Dell, Lenovo, Acer, and Asus laptops for every need",
       brands: ["HP", "Dell", "Lenovo", "Acer", "Asus"],
       image: "/products/1.jpeg",
+      hasImage: true,
     },
     {
       icon: Monitor,
       title: "Desktops & Monitors",
       description: "High-performance desktops and premium display monitors",
       brands: ["HP", "Dell", "Lenovo", "Acer"],
-      image: "/products/2.jpeg",
+      image: null,
+      hasImage: false,
+      gradient: "from-blue-500 to-purple-600",
     },
     {
       icon: Printer,
@@ -32,7 +34,9 @@ export default function ProductsSection() {
       description:
         "Reliable printing and scanning solutions for office and home",
       brands: ["HP", "Canon", "Epson", "Brother"],
-      image: "/products/3.jpeg",
+      image: null,
+      hasImage: false,
+      gradient: "from-green-500 to-teal-600",
     },
     {
       icon: Camera,
@@ -40,13 +44,15 @@ export default function ProductsSection() {
       description: "Advanced security cameras and surveillance systems",
       brands: ["Hikvision", "CP Plus", "Dahua"],
       image: "/products/4.jpeg",
+      hasImage: true,
     },
     {
       icon: HardDrive,
       title: "Computer Parts",
       description: "CPUs, RAM, SSD, HDD, and other essential components",
       brands: ["Intel", "AMD", "Kingston", "Samsung"],
-      image: "/products/5.jpeg",
+      image: "/products/2.jpeg",
+      hasImage: true,
     },
     {
       icon: Keyboard,
@@ -54,20 +60,24 @@ export default function ProductsSection() {
       description: "Keyboards, mice, headphones, and all IT accessories",
       brands: ["Logitech", "HP", "Dell", "Zebronics"],
       image: "/products/6.jpeg",
+      hasImage: true,
     },
     {
       icon: Wifi,
       title: "Networking Equipment",
       description: "Routers, switches, and networking solutions",
       brands: ["TP-Link", "D-Link", "Cisco", "Netgear"],
-      image: "/products/7.jpeg",
+      image: "/products/3.jpeg",
+      hasImage: true,
     },
     {
       icon: Smartphone,
       title: "Mobile & Tablets",
       description: "Smartphones, tablets, and mobile accessories",
       brands: ["Samsung", "Apple", "Xiaomi", "Realme"],
-      image: "/products/8.jpeg",
+      image: null,
+      hasImage: false,
+      gradient: "from-pink-500 to-rose-600",
     },
   ];
 
@@ -94,14 +104,24 @@ export default function ProductsSection() {
                 key={index}
                 className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
               >
-                {/* Image */}
+                {/* Image or Gradient */}
                 <div className="relative w-full h-48">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  {product.hasImage ? (
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div
+                      className={`w-full h-full bg-gradient-to-br ${product.gradient} flex items-center justify-center`}
+                    >
+                      <Icon
+                        className="w-24 h-24 text-white opacity-90"
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6">

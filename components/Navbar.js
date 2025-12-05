@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Menu } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Sheet,
   SheetContent,
@@ -22,7 +22,29 @@ export default function Navbar() {
     { title: "About Us", href: "#about" },
   ];
 
-  /* ✅ सही जगह: handlePayment को यहाँ रखना था */
+  // Google Translate Script Load
+  useEffect(() => {
+    // Add Google Translate script
+    const addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+
+    // Initialize Google Translate
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          includedLanguages: "en,hi",
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        },
+        "google_translate_element"
+      );
+    };
+  }, []);
+
   const handlePayment = () => {
     const options = {
       key: "YOUR_KEY_ID",
@@ -46,7 +68,7 @@ export default function Navbar() {
 
     const element = document.querySelector(href);
     if (element) {
-      const navHeight = 160; // बढ़ा दिया
+      const navHeight = 160;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
@@ -60,7 +82,7 @@ export default function Navbar() {
   return (
     <nav className="bg-green-400 text-pink-600 sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Top Row - Logo + Brand (ऊंचाई दोगुनी) */}
+        {/* Top Row - Logo + Brand */}
         <div className="flex items-center justify-between py-6 min-h-[80px]">
           {/* Logo + Brand Name */}
           <div className="flex items-center gap-3">
@@ -81,7 +103,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Desktop Menu Button (Mobile में दिखेगा) */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
@@ -117,9 +139,8 @@ export default function Navbar() {
                   </button>
 
                   <div className="pt-4 border-t">
-                    <button className="w-full px-4 py-2 bg-[#006680] text-white rounded text-sm">
-                      EN / HI
-                    </button>
+                    {/* Mobile: Google Translate */}
+                    <div id="google_translate_element_mobile"></div>
                   </div>
                 </div>
               </SheetContent>
@@ -127,7 +148,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Third Line - Desktop Menu Bar */}
+        {/* Desktop Menu Bar */}
         <div className="hidden md:block py-3 border-t border-white/20">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-8">
@@ -151,12 +172,34 @@ export default function Navbar() {
               Pay Now
             </button>
 
-            <button className="px-4 py-1 bg-white/10 hover:bg-white/20 rounded text-sm transition-colors">
-              EN / HI
-            </button>
+            {/* Desktop: Google Translate */}
+            <div id="google_translate_element"></div>
           </div>
         </div>
       </div>
+
+      {/* Hide Google Translate branding */}
+      <style jsx global>{`
+        .goog-te-banner-frame {
+          display: none !important;
+        }
+        .goog-te-gadget {
+          color: transparent !important;
+        }
+        .goog-te-gadget img {
+          display: none !important;
+        }
+        .goog-te-combo {
+          padding: 4px 8px;
+          border-radius: 4px;
+          border: 1px solid #ddd;
+          background: white;
+          font-size: 14px;
+        }
+        body {
+          top: 0 !important;
+        }
+      `}</style>
     </nav>
   );
 }
