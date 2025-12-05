@@ -74,9 +74,10 @@ export default function Footer() {
                   +91-9336486071
                 </a>
               </div>
+
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                
+                <a
                   href="mailto:itpoint51@gmail.com"
                   className="hover:text-white"
                 >
@@ -100,7 +101,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
             <div className="flex gap-4 mb-3">
               {/* YouTube */}
-              
+              <a
                 href="https://www.youtube.com/@itpointcomputershop"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -118,7 +119,7 @@ export default function Footer() {
               </a>
 
               {/* Instagram */}
-              
+              <a
                 href="https://www.instagram.com/itpointcomputershop?igsh=ZWFlNjNnOWl6a2Nj&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -136,7 +137,7 @@ export default function Footer() {
               </a>
 
               {/* Facebook */}
-              
+              <a
                 href="https://www.facebook.com/share/19Fx1RQx7i/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -153,6 +154,7 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
+
             <p className="text-sm text-gray-200">
               Stay connected for latest updates.
             </p>
