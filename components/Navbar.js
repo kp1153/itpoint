@@ -15,16 +15,15 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { title: "Home", href: "#home" },
-    { title: "Products", href: "#products" },
+    { title: "Home", href: "/" },
+    { title: "Products", href: "/products" },
     { title: "Services", href: "#services" },
     { title: "Special Offers", href: "#offers" },
+    { title: "Cart", href: "/cart" },
     { title: "About Us", href: "#about" },
   ];
 
-  // Google Translate Script Load
   useEffect(() => {
-    // Add Google Translate script
     const addScript = document.createElement("script");
     addScript.setAttribute(
       "src",
@@ -32,7 +31,6 @@ export default function Navbar() {
     );
     document.body.appendChild(addScript);
 
-    // Initialize Google Translate
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
@@ -61,6 +59,11 @@ export default function Navbar() {
     e.preventDefault();
     setIsOpen(false);
 
+    // Only handle hash links
+    if (!href.startsWith("#")) {
+      return;
+    }
+
     if (href === "#home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -80,12 +83,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-green-400 text-pink-600 sticky top-0 z-50 shadow-lg">
+    <nav className="bg-indigo-700 text-white sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Top Row - Logo + Brand */}
         <div className="flex items-center justify-between py-6 min-h-[80px]">
-          {/* Logo + Brand Name */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full justify-center text-center">
             <div className="w-16 h-16 relative">
               <Image
                 src="/logo.png"
@@ -95,16 +96,19 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <div>
-              <h1 className="text-3xl font-bold leading-tight text-red-600">
+
+            <div className="text-center">
+              <h1 className="text-4xl font-extrabold tracking-wider text-white font-serif">
                 IT POINT COMPUTER SHOP
               </h1>
-              <p className="text-sm text-red-600">Solution that you need</p>
+
+              <p className="text-xl font-semibold italic text-white font-serif drop-shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+                Solutions That You Need
+              </p>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden absolute right-4 top-8">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <button className="p-2 hover:bg-white/10 rounded">
@@ -118,19 +122,30 @@ export default function Navbar() {
                 <SheetTitle className="text-xl font-bold text-rose-600 mb-6">
                   Menu
                 </SheetTitle>
-                <div className="flex flex-col space-y-4">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="text-lg font-medium text-amber-600 hover:text-white py-2"
-                      onClick={(e) => handleNavClick(e, link.href)}
-                    >
-                      {link.title}
-                    </a>
-                  ))}
 
-                  {/* Mobile: Pay Now Button */}
+                <div className="flex flex-col space-y-4">
+                  {navLinks.map((link) =>
+                    link.href.startsWith("/") ? (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-lg font-medium text-amber-600 hover:text-indigo-600 py-2"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.title}
+                      </Link>
+                    ) : (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className="text-lg font-medium text-amber-600 hover:text-indigo-600 py-2"
+                        onClick={(e) => handleNavClick(e, link.href)}
+                      >
+                        {link.title}
+                      </a>
+                    )
+                  )}
+
                   <button
                     onClick={handlePayment}
                     className="w-full px-4 py-2 bg-[#006680] text-white rounded text-sm"
@@ -139,7 +154,6 @@ export default function Navbar() {
                   </button>
 
                   <div className="pt-4 border-t">
-                    {/* Mobile: Google Translate */}
                     <div id="google_translate_element_mobile"></div>
                   </div>
                 </div>
@@ -148,23 +162,31 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Desktop Menu Bar */}
         <div className="hidden md:block py-3 border-t border-white/20">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-lg font-medium hover:text-[#00d4ff] transition-colors py-1"
-                  onClick={(e) => handleNavClick(e, link.href)}
-                >
-                  {link.title}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.href.startsWith("/") ? (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-lg font-medium hover:text-[#00d4ff] transition-colors py-1"
+                  >
+                    {link.title}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-lg font-medium hover:text-[#00d4ff] transition-colors py-1"
+                    onClick={(e) => handleNavClick(e, link.href)}
+                  >
+                    {link.title}
+                  </a>
+                )
+              )}
             </div>
 
-            {/* Desktop: Pay Now Button */}
             <button
               onClick={handlePayment}
               className="px-4 py-1 bg-[#006680] text-white rounded text-sm"
@@ -172,13 +194,11 @@ export default function Navbar() {
               Pay Now
             </button>
 
-            {/* Desktop: Google Translate */}
             <div id="google_translate_element"></div>
           </div>
         </div>
       </div>
 
-      {/* Hide Google Translate branding */}
       <style jsx global>{`
         .goog-te-banner-frame {
           display: none !important;
