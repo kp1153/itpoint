@@ -19,20 +19,12 @@ export default function ProductsSection() {
       image: "/products/4.jpeg",
     },
     {
-      title: "Printers & Scanners",
-      image: "/products/5.jpeg",
-    },
-    {
       title: "Accessories",
       image: "/products/6.jpeg",
     },
     {
       title: "Mobile & Tablets",
       image: "/products/7.jpeg",
-    },
-    {
-      title: "Desktops & Monitors",
-      image: "/products/8.jpeg",
     },
   ];
 
