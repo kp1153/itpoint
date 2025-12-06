@@ -1,6 +1,33 @@
 import { TagIcon } from "@sanity/icons";
 import { defineField, defineType, defineArrayMember } from "sanity";
 
+// Custom component for multiple file upload
+const MultiImageInput = (props) => {
+  return props.renderDefault({
+    ...props,
+    arrayFunctions: () => (
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        onChange={(e) => {
+          const files = Array.from(e.target.files || []);
+          files.forEach((file) => {
+            props.onChange({
+              _type: "image",
+              asset: {
+                _type: "reference",
+                _ref: file,
+              },
+            });
+          });
+        }}
+        style={{ margin: "10px 0" }}
+      />
+    ),
+  });
+};
+
 export const offerType = defineType({
   name: "offer",
   title: "Special Offers",
@@ -21,13 +48,14 @@ export const offerType = defineType({
     }),
     defineField({
       name: "images",
-      title: "Offer Images",
+      title: "Offer Images (drag multiple or click +)",
       type: "array",
       of: [
         defineArrayMember({
           type: "image",
           options: {
             hotspot: true,
+            accept: "image/*",
           },
           fields: [
             {
@@ -40,6 +68,9 @@ export const offerType = defineType({
       ],
       options: {
         layout: "grid",
+      },
+      components: {
+        input: MultiImageInput,
       },
     }),
     defineField({
