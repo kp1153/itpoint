@@ -1,5 +1,5 @@
 import { TagIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
+import { defineField, defineType, defineArrayMember } from "sanity";
 
 export const offerType = defineType({
   name: "offer",
@@ -20,17 +20,22 @@ export const offerType = defineType({
       rows: 3,
     }),
     defineField({
-      name: "image",
-      title: "Offer Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        defineField({
-          name: "alt",
-          type: "string",
-          title: "Alternative text",
+      name: "images",
+      title: "Offer Images",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: "alt",
+              type: "string",
+              title: "Alternative text",
+            },
+          ],
         }),
       ],
     }),
@@ -50,7 +55,7 @@ export const offerType = defineType({
   preview: {
     select: {
       title: "title",
-      media: "image",
+      media: "images.0",
       isActive: "isActive",
     },
     prepare(selection) {
