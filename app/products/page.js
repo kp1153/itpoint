@@ -123,7 +123,7 @@ export default async function ProductsPage() {
                     </p>
                   )}
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 mb-3">
                     <span className="text-2xl font-bold text-indigo-700">
                       ₹{finalPrice.toLocaleString()}
                     </span>
@@ -135,10 +135,20 @@ export default async function ProductsPage() {
                   </div>
 
                   {product.brand && (
-                    <p className="text-xs text-gray-400 mt-2 uppercase">
+                    <p className="text-xs text-gray-400 mb-3 uppercase">
                       {product.brand}
                     </p>
                   )}
+
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = `/products/${product.slug.current}`;
+                    }}
+                    className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                  >
+                    Shop Now
+                  </button>
                 </div>
               </Link>
             );
