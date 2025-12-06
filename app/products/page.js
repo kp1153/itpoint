@@ -43,7 +43,7 @@ export default async function ProductsPage() {
           Our Products
         </h1>
 
-        {/* Category Filter - You can add client-side filtering later */}
+        {/* Category Filter */}
         <div className="mb-8">
           <div className="flex flex-wrap gap-3">
             <Link
@@ -70,6 +70,7 @@ export default async function ProductsPage() {
             const finalPrice = product.discountPrice || product.price;
             const hasDiscount =
               product.discountPrice && product.discountPrice < product.price;
+
             const discountPercent = hasDiscount
               ? Math.round(
                   ((product.price - product.discountPrice) / product.price) *
@@ -140,15 +141,10 @@ export default async function ProductsPage() {
                     </p>
                   )}
 
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.location.href = `/products/${product.slug.current}`;
-                    }}
-                    className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
-                  >
+                  {/* FIXED: No button with onClick */}
+                  <div className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold text-center hover:bg-indigo-700 transition-colors">
                     Shop Now
-                  </button>
+                  </div>
                 </div>
               </Link>
             );
