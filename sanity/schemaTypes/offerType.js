@@ -38,6 +38,9 @@ export const offerType = defineType({
           ],
         }),
       ],
+      options: {
+        layout: "grid",
+      },
     }),
     defineField({
       name: "isActive",
