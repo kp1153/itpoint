@@ -1,83 +1,38 @@
-import {
-  Monitor,
-  Laptop,
-  Printer,
-  HardDrive,
-  Keyboard,
-  Camera,
-  Wifi,
-  Smartphone,
-} from "lucide-react";
+import Image from "next/image";
 
 export default function ProductsSection() {
   const products = [
     {
-      icon: Laptop,
       title: "Laptops",
-      description: "HP, Dell, Lenovo, Acer, and Asus laptops for every need",
-      brands: ["HP", "Dell", "Lenovo", "Acer", "Asus"],
       image: "/products/1.jpeg",
-      hasImage: true,
     },
     {
-      icon: Monitor,
-      title: "Desktops & Monitors",
-      description: "High-performance desktops and premium display monitors",
-      brands: ["HP", "Dell", "Lenovo", "Acer"],
-      image: null,
-      hasImage: false,
-      gradient: "from-blue-500 to-purple-600",
-    },
-    {
-      icon: Printer,
-      title: "Printers & Scanners",
-      description:
-        "Reliable printing and scanning solutions for office and home",
-      brands: ["HP", "Canon", "Epson", "Brother"],
-      image: null,
-      hasImage: false,
-      gradient: "from-green-500 to-teal-600",
-    },
-    {
-      icon: Camera,
-      title: "CCTV Cameras",
-      description: "Advanced security cameras and surveillance systems",
-      brands: ["Hikvision", "CP Plus", "Dahua"],
-      image: "/products/4.jpeg",
-      hasImage: true,
-    },
-    {
-      icon: HardDrive,
       title: "Computer Parts",
-      description: "CPUs, RAM, SSD, HDD, and other essential components",
-      brands: ["Intel", "AMD", "Kingston", "Samsung"],
       image: "/products/2.jpeg",
-      hasImage: true,
     },
     {
-      icon: Keyboard,
-      title: "Accessories",
-      description: "Keyboards, mice, headphones, and all IT accessories",
-      brands: ["Logitech", "HP", "Dell", "Zebronics"],
-      image: "/products/6.jpeg",
-      hasImage: true,
-    },
-    {
-      icon: Wifi,
       title: "Networking Equipment",
-      description: "Routers, switches, and networking solutions",
-      brands: ["TP-Link", "D-Link", "Cisco", "Netgear"],
       image: "/products/3.jpeg",
-      hasImage: true,
     },
     {
-      icon: Smartphone,
+      title: "CCTV Cameras",
+      image: "/products/4.jpeg",
+    },
+    {
+      title: "Printers & Scanners",
+      image: "/products/5.jpeg",
+    },
+    {
+      title: "Accessories",
+      image: "/products/6.jpeg",
+    },
+    {
       title: "Mobile & Tablets",
-      description: "Smartphones, tablets, and mobile accessories",
-      brands: ["Samsung", "Apple", "Xiaomi", "Realme"],
-      image: null,
-      hasImage: false,
-      gradient: "from-pink-500 to-rose-600",
+      image: "/products/7.jpeg",
+    },
+    {
+      title: "Desktops & Monitors",
+      image: "/products/8.jpeg",
     },
   ];
 
@@ -96,65 +51,28 @@ export default function ProductsSection() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product, index) => {
-            const Icon = product.icon;
-            return (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
-              >
-                {/* Image or Gradient */}
-                <div className="relative w-full h-48">
-                  {product.hasImage ? (
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div
-                      className={`w-full h-full bg-gradient-to-br ${product.gradient} flex items-center justify-center`}
-                    >
-                      <Icon
-                        className="w-24 h-24 text-white opacity-90"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-6">
-                  {/* Icon */}
-                  <div className="w-16 h-16 bg-[#006680] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {product.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {product.description}
-                  </p>
-
-                  {/* Brands */}
-                  <div className="flex flex-wrap gap-2">
-                    {product.brands.map((brand, idx) => (
-                      <span
-                        key={idx}
-                        className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full"
-                      >
-                        {brand}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product, idx) => (
+            <div
+              key={idx}
+              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+            >
+              <div className="relative w-full aspect-square">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  fill
+                  className="object-cover"
+                  priority={idx < 4}
+                />
               </div>
-            );
-          })}
+              <div className="p-4 text-center bg-gradient-to-b from-white to-gray-50">
+                <h3 className="text-lg font-bold text-gray-900">
+                  {product.title}
+                </h3>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* CTA */}
