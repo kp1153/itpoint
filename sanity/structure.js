@@ -5,13 +5,12 @@ export const structure = (S) =>
     .items([
       S.documentTypeListItem("category").title("📂 Categories"),
       S.documentTypeListItem("product").title("📦 Products"),
-      S.documentTypeListItem("order").title("🛒 Orders"),
       S.divider(),
       S.documentTypeListItem("offer").title("🎁 Special Offers"),
       S.divider(),
       ...S.documentTypeListItems().filter(
         (item) =>
           item.getId() &&
-          !["category", "product", "order", "offer"].includes(item.getId())
+          !["category", "product", "offer"].includes(item.getId())
       ),
     ]);
