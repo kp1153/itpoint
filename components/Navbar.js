@@ -17,10 +17,10 @@ export default function Navbar() {
   const navLinks = [
     { title: "Home", href: "/" },
     { title: "Products", href: "/products" },
-    { title: "Services", href: "#services" },
-    { title: "Special Offers", href: "#offers" },
+    { title: "Services", href: "/#services" },
+    { title: "Special Offers", href: "/#offers" },
     { title: "Cart", href: "/cart" },
-    { title: "About Us", href: "#about" },
+    { title: "About Us", href: "/#about" },
   ];
 
   useEffect(() => {
@@ -42,45 +42,6 @@ export default function Navbar() {
       );
     };
   }, []);
-
-  const handlePayment = () => {
-    const options = {
-      key: "YOUR_KEY_ID",
-      amount: 10000,
-      currency: "INR",
-      name: "IT Point",
-      description: "Test Payment",
-    };
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-  };
-
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
-    setIsOpen(false);
-
-    // Only handle hash links
-    if (!href.startsWith("#")) {
-      return;
-    }
-
-    if (href === "#home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 160;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <nav className="bg-indigo-700 text-white sticky top-0 z-50 shadow-lg">
@@ -108,6 +69,7 @@ export default function Navbar() {
             </div>
           </div>
 
+          {/* Mobile Menu */}
           <div className="md:hidden absolute right-4 top-8">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
@@ -124,34 +86,16 @@ export default function Navbar() {
                 </SheetTitle>
 
                 <div className="flex flex-col space-y-4">
-                  {navLinks.map((link) =>
-                    link.href.startsWith("/") ? (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="text-lg font-medium text-amber-600 hover:text-indigo-600 py-2"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {link.title}
-                      </Link>
-                    ) : (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        className="text-lg font-medium text-amber-600 hover:text-indigo-600 py-2"
-                        onClick={(e) => handleNavClick(e, link.href)}
-                      >
-                        {link.title}
-                      </a>
-                    )
-                  )}
-
-                  <button
-                    onClick={handlePayment}
-                    className="w-full px-4 py-2 bg-[#006680] text-white rounded text-sm"
-                  >
-                    Pay Now
-                  </button>
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-lg font-medium text-amber-600 hover:text-indigo-600 py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
 
                   <div className="pt-4 border-t">
                     <div id="google_translate_element_mobile"></div>
@@ -162,37 +106,20 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Desktop Menu */}
         <div className="hidden md:block py-3 border-t border-white/20">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-8">
-              {navLinks.map((link) =>
-                link.href.startsWith("/") ? (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-lg font-medium hover:text-[#00d4ff] transition-colors py-1"
-                  >
-                    {link.title}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="text-lg font-medium hover:text-[#00d4ff] transition-colors py-1"
-                    onClick={(e) => handleNavClick(e, link.href)}
-                  >
-                    {link.title}
-                  </a>
-                )
-              )}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-lg font-medium hover:text-[#00d4ff] transition-colors py-1"
+                >
+                  {link.title}
+                </Link>
+              ))}
             </div>
-
-            <button
-              onClick={handlePayment}
-              className="px-4 py-1 bg-[#006680] text-white rounded text-sm"
-            >
-              Pay Now
-            </button>
 
             <div id="google_translate_element"></div>
           </div>

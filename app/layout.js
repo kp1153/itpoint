@@ -91,13 +91,13 @@ export const metadata = {
     canonical: "https://itpointcomputershop.in",
   },
   verification: {
-    google: "your-google-verification-code", // Google Search Console se milega
+    google: "your-google-verification-code",
   },
   category: "technology",
   other: {
     "geo.region": "IN-UP",
     "geo.placename": "Varanasi",
-    "geo.position": "25.3176;82.9739", // Varanasi coordinates
+    "geo.position": "25.3176;82.9739",
     "business.contact_data.street_address":
       "S. 6/1, Near LT College, Orderly Bazar",
     "business.contact_data.locality": "Varanasi",
@@ -123,7 +123,6 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="format-detection" content="telephone=yes" />
 
-        {/* Local Business Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -239,7 +238,6 @@ export default function RootLayout({ children }) {
         <main className="min-h-screen">{children}</main>
 
         <Footer />
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </body>
     </html>
   );
