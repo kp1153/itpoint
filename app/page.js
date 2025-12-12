@@ -1,4 +1,3 @@
-// app/page.js
 import OffersSection from "@/components/OffersSection";
 import HeroSection from "@/components/HeroSection";
 import ProductsSection from "@/components/ProductsSection";

@@ -44,7 +44,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-indigo-700 text-white sticky top-0 z-50 shadow-lg">
+    <nav className="bg-indigo-700 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between py-6 min-h-[80px]">
           <div className="flex items-center gap-3 w-full justify-center text-center">
