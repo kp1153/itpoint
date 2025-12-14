@@ -5,7 +5,7 @@ import { Stack, Button, Card, Text, Spinner, Flex, Grid } from "@sanity/ui";
 import { insert, unset } from "sanity";
 import { TrashIcon } from "@sanity/icons";
 
-// Multiple Cloudinary Upload Component (same as offer)
+// Multiple Cloudinary Upload Component
 function MultiCloudinaryInput(props) {
   const { onChange, value = [] } = props;
   const [uploading, setUploading] = useState(false);
@@ -48,7 +48,6 @@ function MultiCloudinaryInput(props) {
                   _type: "productImage",
                   _key: `img-${Date.now()}-${i}`,
                   url: data.secure_url,
-                  alt: file.name,
                 },
               ],
               "after",
@@ -111,7 +110,7 @@ function MultiCloudinaryInput(props) {
               <Stack space={2}>
                 <img
                   src={img.url}
-                  alt={img.alt || "Product"}
+                  alt="Product"
                   style={{
                     width: "100%",
                     height: "120px",
@@ -204,11 +203,6 @@ export const productType = defineType({
               type: "string",
               title: "Image URL",
             },
-            {
-              name: "alt",
-              type: "string",
-              title: "Alt Text",
-            },
           ],
         },
       ],
@@ -224,19 +218,6 @@ export const productType = defineType({
       validation: (Rule) => Rule.required().positive(),
     }),
     defineField({
-      name: "discountPrice",
-      title: "Discount Price (₹)",
-      type: "number",
-      validation: (Rule) =>
-        Rule.positive().custom((discountPrice, context) => {
-          const price = context.document?.price;
-          if (discountPrice && price && discountPrice >= price) {
-            return "Discount price must be less than original price";
-          }
-          return true;
-        }),
-    }),
-    defineField({
       name: "stock",
       title: "Stock Quantity",
       type: "number",
@@ -249,96 +230,21 @@ export const productType = defineType({
       type: "boolean",
       initialValue: true,
     }),
-    defineField({
-      name: "sku",
-      title: "SKU / Product Code",
-      type: "string",
-    }),
-    defineField({
-      name: "specifications",
-      title: "Specifications",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          fields: [
-            {
-              name: "key",
-              type: "string",
-              title: "Specification Name",
-              placeholder: "e.g., RAM, Storage, Screen Size",
-            },
-            {
-              name: "value",
-              type: "string",
-              title: "Specification Value",
-              placeholder: "e.g., 8GB, 512GB SSD, 15.6 inch",
-            },
-          ],
-          preview: {
-            select: {
-              key: "key",
-              value: "value",
-            },
-            prepare({ key, value }) {
-              return {
-                title: `${key}: ${value}`,
-              };
-            },
-          },
-        },
-      ],
-    }),
-    defineField({
-      name: "isFeatured",
-      title: "Featured Product (Show on Homepage)",
-      type: "boolean",
-      initialValue: false,
-    }),
-    defineField({
-      name: "isActive",
-      title: "Show this product",
-      type: "boolean",
-      initialValue: true,
-    }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      initialValue: 0,
-    }),
   ],
   preview: {
     select: {
       title: "title",
       category: "category.name",
       price: "price",
-      discountPrice: "discountPrice",
       images: "images",
       inStock: "inStock",
-      isActive: "isActive",
     },
     prepare(selection) {
-      const {
-        title,
-        category,
-        price,
-        discountPrice,
-        images,
-        inStock,
-        isActive,
-      } = selection;
-      const priceText = discountPrice
-        ? `₹${discountPrice} (was ₹${price})`
-        : `₹${price}`;
-      const status = !isActive
-        ? "❌ Inactive"
-        : !inStock
-          ? "⚠️ Out of Stock"
-          : "✅ Active";
+      const { title, category, price, images, inStock } = selection;
+      const status = inStock ? "✅ In Stock" : "⚠️ Out of Stock";
       return {
         title: title,
-        subtitle: `${category} | ${priceText} | ${status}`,
+        subtitle: `${category} | ₹${price} | ${status}`,
         media: images?.[0]?.url ? { url: images[0].url } : undefined,
       };
     },

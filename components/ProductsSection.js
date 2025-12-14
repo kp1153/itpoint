@@ -7,7 +7,7 @@ async function getCategories() {
     name,
     "slug": slug.current,
     "productCount": count(*[_type == "product" && references(^._id) && isActive == true])
-  }[0...8]`;
+  }`;
 
   return await client.fetch(query);
 }

@@ -14,13 +14,19 @@ export const categoryType = defineType({
       options: {
         list: [
           { title: "Accessories", value: "accessories" },
-          { title: "Cartridge", value: "cartridge" },
-          { title: "Laptop", value: "laptop" },
-          { title: "Monitor", value: "monitor" },
-          { title: "Printer", value: "printer" },
-          { title: "Tablet", value: "tablet" },
+          { title: "Antivirus", value: "antivirus" },
           { title: "Assemble Desktop", value: "assemble-desktop" },
           { title: "Cabinet", value: "cabinet" },
+          { title: "Cartridge", value: "cartridge" },
+          { title: "CCTV Camera", value: "cctv-camera" },
+          { title: "Desktop", value: "desktop" },
+          { title: "Laptop", value: "laptop" },
+          { title: "Monitor", value: "monitor" },
+          { title: "Motherboard", value: "motherboard" },
+          { title: "Printer", value: "printer" },
+          { title: "RAM", value: "ram" },
+          { title: "Storage", value: "storage" },
+          { title: "Tablet", value: "tablet" },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -35,51 +41,15 @@ export const categoryType = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
-      rows: 3,
-    }),
-    defineField({
-      name: "image",
-      title: "Category Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative Text",
-        },
-      ],
-    }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      initialValue: 0,
-    }),
-    defineField({
-      name: "isActive",
-      title: "Show this category",
-      type: "boolean",
-      initialValue: true,
-    }),
   ],
   preview: {
     select: {
       title: "name",
-      media: "image",
-      isActive: "isActive",
     },
     prepare(selection) {
-      const { title, isActive } = selection;
+      const { title } = selection;
       return {
         title: title,
-        subtitle: isActive ? "✅ Active" : "❌ Inactive",
       };
     },
   },
