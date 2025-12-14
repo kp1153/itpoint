@@ -38,31 +38,18 @@ export default async function ProductsSection() {
               className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl hover:border-[#006680] transition-all duration-300 hover:-translate-y-1 text-center group"
             >
               <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#006680] transition-colors mb-2">
-                {category.name}
+                {category.name
+                  .split(" ")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ")}
               </h3>
               {category.productCount > 0 && (
                 <p className="text-sm text-gray-500">
-                  {category.productCount} Products
+                  {category.productCount} products
                 </p>
               )}
             </Link>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <p className="text-gray-600 mb-4">
-            Looking for something specific? Contact us for personalized
-            recommendations!
-          </p>
-          <a
-            href="https://wa.me/919336486071"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-[#006680] text-white px-8 py-3 rounded-lg hover:bg-[#005570] transition-colors font-semibold"
-          >
-            Contact Us
-          </a>
         </div>
       </div>
     </section>
