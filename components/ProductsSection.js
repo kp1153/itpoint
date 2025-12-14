@@ -1,32 +1,19 @@
-import Image from "next/image";
+import Link from "next/link";
+import { client } from "@/sanity/lib/client";
 
-export default function ProductsSection() {
-  const products = [
-    {
-      title: "Laptops",
-      image: "/products/1.jpeg",
-    },
-    {
-      title: "Computer Parts",
-      image: "/products/2.jpeg",
-    },
-    {
-      title: "Networking Equipment",
-      image: "/products/3.jpeg",
-    },
-    {
-      title: "CCTV Cameras",
-      image: "/products/4.jpeg",
-    },
-    {
-      title: "Accessories",
-      image: "/products/6.jpeg",
-    },
-    {
-      title: "Mobile & Tablets",
-      image: "/products/7.jpeg",
-    },
-  ];
+async function getCategories() {
+  const query = `*[_type == "category" && isActive == true] | order(order asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    "productCount": count(*[_type == "product" && references(^._id) && isActive == true])
+  }[0...8]`;
+
+  return await client.fetch(query);
+}
+
+export default async function ProductsSection() {
+  const categories = await getCategories();
 
   return (
     <section id="products" className="py-16 bg-white">
@@ -42,28 +29,23 @@ export default function ProductsSection() {
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product, idx) => (
-            <div
-              key={idx}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+        {/* Categories Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {categories.map((category) => (
+            <Link
+              key={category._id}
+              href={`/products?category=${category.slug}`}
+              className="bg-gradient-to-br from-white to-gray-50 border-2 border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl hover:border-[#006680] transition-all duration-300 hover:-translate-y-1 text-center group"
             >
-              <div className="relative w-full aspect-square">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  priority={idx < 4}
-                />
-              </div>
-              <div className="p-4 text-center bg-gradient-to-b from-white to-gray-50">
-                <h3 className="text-lg font-bold text-gray-900">
-                  {product.title}
-                </h3>
-              </div>
-            </div>
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#006680] transition-colors mb-2">
+                {category.name}
+              </h3>
+              {category.productCount > 0 && (
+                <p className="text-sm text-gray-500">
+                  {category.productCount} Products
+                </p>
+              )}
+            </Link>
           ))}
         </div>
 

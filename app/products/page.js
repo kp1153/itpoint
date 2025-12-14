@@ -2,8 +2,14 @@ import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getProducts() {
-  const query = `*[_type == "product" && isActive == true] | order(order asc, _createdAt desc) {
+async function getProducts(categorySlug) {
+  let query = `*[_type == "product" && isActive == true`;
+
+  if (categorySlug) {
+    query += ` && category->slug.current == "${categorySlug}"`;
+  }
+
+  query += `] | order(order asc, _createdAt desc) {
     _id,
     title,
     slug,
@@ -26,37 +32,55 @@ async function getCategories() {
   const query = `*[_type == "category" && isActive == true] | order(order asc) {
     _id,
     name,
-    slug
+    "slug": slug.current
   }`;
 
   return await client.fetch(query);
 }
 
-export default async function ProductsPage() {
-  const products = await getProducts();
+export default async function ProductsPage({ searchParams }) {
+  const resolvedParams = await searchParams;
+  const categorySlug = resolvedParams?.category;
+
+  const products = await getProducts(categorySlug);
   const categories = await getCategories();
+
+  const currentCategory = categories.find((c) => c.slug === categorySlug);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-indigo-700 mb-8">
-          Our Products
+        <h1 className="text-4xl font-bold text-indigo-700 mb-2">
+          {currentCategory ? currentCategory.name : "All Products"}
         </h1>
+        {currentCategory && (
+          <p className="text-gray-600 mb-8">
+            Browse our {currentCategory.name.toLowerCase()} collection
+          </p>
+        )}
 
         {/* Category Filter */}
         <div className="mb-8">
           <div className="flex flex-wrap gap-3">
             <Link
               href="/products"
-              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                !categorySlug
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-50"
+              }`}
             >
               All Products
             </Link>
             {categories.map((cat) => (
               <Link
                 key={cat._id}
-                href={`/products?category=${cat.slug.current}`}
-                className="px-4 py-2 bg-white text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50"
+                href={`/products?category=${cat.slug}`}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  categorySlug === cat.slug
+                    ? "bg-indigo-600 text-white"
+                    : "bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-50"
+                }`}
               >
                 {cat.name}
               </Link>
@@ -141,9 +165,8 @@ export default async function ProductsPage() {
                     </p>
                   )}
 
-                  {/* FIXED: No button with onClick */}
                   <div className="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold text-center hover:bg-indigo-700 transition-colors">
-                    Shop Now
+                    View Details
                   </div>
                 </div>
               </Link>
@@ -153,7 +176,12 @@ export default async function ProductsPage() {
 
         {products.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-gray-500 text-xl">No products found</p>
+            <p className="text-gray-500 text-xl mb-4">
+              No products found in this category
+            </p>
+            <Link href="/products" className="text-indigo-600 hover:underline">
+              View all products →
+            </Link>
           </div>
         )}
       </div>
