@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getProducts(categorySlug) {
-  let query = `*[_type == "product" && isActive == true`;
+  let query = `*[_type == "product"`;
 
   if (categorySlug) {
     query += ` && category->slug.current == "${categorySlug}"`;
   }
 
-  query += `] | order(order asc, _createdAt desc) {
+  query += `] | order(_createdAt desc) {
     _id,
     title,
     slug,
@@ -21,15 +21,14 @@ async function getProducts(categorySlug) {
       name,
       slug
     },
-    brand,
-    isFeatured
+    brand
   }`;
 
   return await client.fetch(query);
 }
 
 async function getCategories() {
-  const query = `*[_type == "category" && isActive == true] | order(order asc) {
+  const query = `*[_type == "category"] {
     _id,
     name,
     "slug": slug.current

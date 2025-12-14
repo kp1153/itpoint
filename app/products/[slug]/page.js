@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import AddToCart from "@/components/AddToCart";
 
 async function getProduct(slug) {
-  const query = `*[_type == "product" && slug.current == $slug && isActive == true][0] {
+  const query = `*[_type == "product" && slug.current == $slug][0] {
     _id,
     title,
     slug,
@@ -19,9 +19,7 @@ async function getProduct(slug) {
       name,
       slug
     },
-    brand,
-    specifications,
-    sku
+    brand
   }`;
 
   return await client.fetch(query, { slug });
@@ -129,10 +127,6 @@ export default async function ProductDetailPage({ params }) {
               </p>
             )}
 
-            {product.sku && (
-              <p className="text-xs text-gray-400 mb-4">SKU: {product.sku}</p>
-            )}
-
             {/* Price */}
             <div className="mb-6">
               <div className="flex items-baseline gap-3">
@@ -184,28 +178,6 @@ export default async function ProductDetailPage({ params }) {
 
             {/* Add to Cart */}
             <AddToCart product={product} />
-
-            {/* Specifications */}
-            {product.specifications && product.specifications.length > 0 && (
-              <div className="mt-8 border-t pt-6">
-                <h3 className="font-bold text-xl text-gray-800 mb-4">
-                  Specifications
-                </h3>
-                <div className="space-y-2">
-                  {product.specifications.map((spec, idx) => (
-                    <div
-                      key={idx}
-                      className="flex justify-between py-2 border-b border-gray-100"
-                    >
-                      <span className="font-medium text-gray-700">
-                        {spec.key}
-                      </span>
-                      <span className="text-gray-600">{spec.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
