@@ -8,7 +8,7 @@ export default function AboutSection() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            About <span className="text-[#006680]">IT Point</span>
+            About <span className="text-[#006680]">Us</span>
           </h2>
           <div className="w-24 h-1 bg-[#006680] mx-auto"></div>
         </div>
@@ -20,7 +20,7 @@ export default function AboutSection() {
             <p className="text-lg text-gray-700 leading-relaxed">
               Your trusted destination for complete IT solutions and premium
               electronic essentials. We bring you a wide selection of
-              high-quality products — from laptops, CPUs, printers, and monitors
+              high-quality products – from laptops, CPUs, printers, and monitors
               to accessories and more. Whether it's for your home, office, or
               business, we deliver reliable gadgets, expert services, and
               seamless support to keep your digital world running smarter and
@@ -31,13 +31,13 @@ export default function AboutSection() {
           {/* Second Paragraph */}
           <div className="bg-[#006680] p-8 rounded-lg shadow-md">
             <p className="text-lg text-white leading-relaxed">
-              <span className="font-bold">"IT Point"</span> is a leading trader
-              and service provider of a wide range of HP, Dell, Lenovo, Acer,
-              and Asus laptops and desktops. With years of expertise, we ensure
-              genuine products, competitive pricing, and dependable after-sales
-              service. From device setup to maintenance and troubleshooting, our
-              team is committed to delivering trustworthy solutions that match
-              the needs of students, professionals, and businesses alike.
+              We are a leading trader and service provider of a wide range of
+              HP, Dell, Lenovo, Acer, and Asus laptops and desktops. With years
+              of expertise, we ensure genuine products, competitive pricing, and
+              dependable after-sales service. From device setup to maintenance
+              and troubleshooting, our team is committed to delivering
+              trustworthy solutions that match the needs of students,
+              professionals, and businesses alike.
             </p>
           </div>
 

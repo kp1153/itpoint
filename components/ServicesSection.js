@@ -55,7 +55,7 @@ export default function ServicesSection() {
       icon: Headphones,
       title: "After-Sales Support",
       description:
-        "Dedicated customer support and warranty services for all products purchased from IT Point",
+        "Dedicated customer support and warranty services for all products purchased from us",
       features: ["Warranty Claims", "Technical Assistance", "Product Guidance"],
     },
   ];
@@ -140,13 +140,13 @@ export default function ServicesSection() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="tel:+919336486071"
+              href="tel:+919999999999"
               className="bg-white text-[#006680] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
             >
               Call Now
             </a>
             <a
-              href="https://wa.me/919336486071"
+              href="https://wa.me/919999999999"
               target="_blank"
               rel="noopener noreferrer"
               className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-[#006680] transition-colors font-semibold"
