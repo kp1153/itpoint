@@ -17,21 +17,19 @@ export default function RazorpayPayment() {
 
   const handlePayment = async () => {
     if (!amount || amount <= 0) {
-      alert("कृपया सही राशि दर्ज करें");
+      alert("Please enter valid amount");
       return;
     }
 
     setLoading(true);
 
-    // Load Razorpay script
     const res = await loadRazorpayScript();
     if (!res) {
-      alert("Razorpay SDK लोड नहीं हो सका। कृपया दोबारा कोशिश करें।");
+      alert("Razorpay SDK failed to load. Please try again.");
       setLoading(false);
       return;
     }
 
-    // Create order
     try {
       const orderResponse = await fetch("/api/razorpay/create-order", {
         method: "POST",
@@ -45,17 +43,14 @@ export default function RazorpayPayment() {
         throw new Error("Order creation failed");
       }
 
-      // Initialize Razorpay with ALL payment methods
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "IT Point Computer Shop",
+        name: "Computer Shop",
         description: "Payment Transaction",
-        image: "/logo.png", // Optional: आपका logo यहाँ डालें
         order_id: order.id,
 
-        // ALL Payment Methods Enable
         config: {
           display: {
             blocks: {
@@ -94,7 +89,6 @@ export default function RazorpayPayment() {
           },
         },
 
-        // Payment Methods
         method: {
           netbanking: true,
           card: true,
@@ -107,7 +101,6 @@ export default function RazorpayPayment() {
         },
 
         handler: async function (response) {
-          // Verify payment
           const verifyResponse = await fetch("/api/razorpay/verify-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -121,10 +114,10 @@ export default function RazorpayPayment() {
           const verifyData = await verifyResponse.json();
 
           if (verifyData.success) {
-            alert("भुगतान सफल रहा! ✅");
+            alert("Payment Successful! ✅");
             setAmount("");
           } else {
-            alert("भुगतान सत्यापन विफल रहा");
+            alert("Payment verification failed");
           }
           setLoading(false);
         },
@@ -136,17 +129,17 @@ export default function RazorpayPayment() {
         },
 
         notes: {
-          address: "IT Point Computer Shop",
+          address: "Computer Shop",
         },
 
         theme: {
-          color: "#3399cc",
+          color: "#d97706",
         },
 
         modal: {
           ondismiss: function () {
             setLoading(false);
-            alert("भुगतान रद्द किया गया");
+            alert("Payment cancelled");
           },
         },
       };
@@ -155,32 +148,32 @@ export default function RazorpayPayment() {
       paymentObject.open();
     } catch (error) {
       console.error("Payment error:", error);
-      alert("भुगतान में त्रुटि हुई। कृपया दोबारा कोशिश करें।");
+      alert("Payment error. Please try again.");
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-zinc-900 to-amber-900 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            IT Point Computer Shop
+            Computer Shop
           </h1>
-          <p className="text-gray-600">सुरक्षित भुगतान</p>
+          <p className="text-gray-600">Secure Payment</p>
         </div>
 
         <div className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              राशि (₹)
+              Amount (₹)
             </label>
             <input
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder="राशि दर्ज करें"
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+              placeholder="Enter amount"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-amber-600 transition-colors"
               disabled={loading}
             />
           </div>
@@ -188,15 +181,14 @@ export default function RazorpayPayment() {
           <button
             onClick={handlePayment}
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full bg-gradient-to-r from-amber-600 to-amber-700 text-white py-3 rounded-lg font-semibold hover:from-amber-700 hover:to-amber-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02] active:scale-[0.98]"
           >
-            {loading ? "प्रक्रिया जारी है..." : "भुगतान करें"}
+            {loading ? "Processing..." : "Pay Now"}
           </button>
 
-          {/* Payment Methods Display */}
           <div className="bg-gray-50 rounded-lg p-4 space-y-2">
             <p className="text-sm font-medium text-gray-700 text-center mb-3">
-              उपलब्ध भुगतान विधियाँ:
+              Available Payment Methods:
             </p>
             <div className="grid grid-cols-2 gap-2 text-xs text-gray-600">
               <div className="flex items-center gap-2">
@@ -206,7 +198,7 @@ export default function RazorpayPayment() {
                 <span>🏦</span> Net Banking
               </div>
               <div className="flex items-center gap-2">
-                <span>📱</span> UPI (GPay, PhonePe)
+                <span>📱</span> UPI
               </div>
               <div className="flex items-center gap-2">
                 <span>💰</span> Wallets
