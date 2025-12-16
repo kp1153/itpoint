@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import {
   Wrench,
   Shield,
@@ -21,7 +20,7 @@ export default function ServicesSection() {
       description:
         "Complete installation and configuration of laptops, desktops, printers, and CCTV systems for seamless operation",
       features: ["OS Installation", "Driver Setup", "Network Configuration"],
-      image: "/services/1.jpeg",
+      gradient: "from-blue-500 to-blue-700",
     },
     {
       icon: Wrench,
@@ -33,7 +32,7 @@ export default function ServicesSection() {
         "Software Troubleshooting",
         "Virus Removal",
       ],
-      image: "/services/2.jpeg",
+      gradient: "from-red-500 to-red-700",
     },
     {
       icon: RefreshCw,
@@ -41,6 +40,7 @@ export default function ServicesSection() {
       description:
         "Upgrade your systems with latest components and optimize performance for better productivity",
       features: ["RAM Upgrade", "SSD Installation", "Performance Tuning"],
+      gradient: "from-green-500 to-green-700",
     },
     {
       icon: Shield,
@@ -48,6 +48,7 @@ export default function ServicesSection() {
       description:
         "Secure data backup solutions and professional data recovery services to protect your valuable information",
       features: ["Cloud Backup", "Data Recovery", "Hard Drive Cloning"],
+      gradient: "from-purple-500 to-purple-700",
     },
     {
       icon: Truck,
@@ -55,6 +56,7 @@ export default function ServicesSection() {
       description:
         "Convenient on-site technical support at your home or office for immediate assistance",
       features: ["Home Service", "Office Support", "Emergency Visits"],
+      gradient: "from-orange-500 to-orange-700",
     },
     {
       icon: Headphones,
@@ -62,6 +64,7 @@ export default function ServicesSection() {
       description:
         "Dedicated customer support and warranty services for all products purchased from us",
       features: ["Warranty Claims", "Technical Assistance", "Product Guidance"],
+      gradient: "from-pink-500 to-pink-700",
     },
   ];
 
@@ -97,29 +100,21 @@ export default function ServicesSection() {
                     : "shadow-lg hover:shadow-xl border-2 border-transparent"
                 }`}
               >
-                {service.image && (
-                  <div className="relative w-full h-48 overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                {/* Gradient Header */}
+                <div
+                  className={`relative h-32 bg-gradient-to-br ${service.gradient} overflow-hidden`}
+                >
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Icon
+                      className={`w-16 h-16 text-white transition-all duration-500 ${
+                        activeService === index ? "scale-125 rotate-12" : ""
+                      }`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   </div>
-                )}
+                </div>
 
                 <div className="p-6 relative">
-                  <div
-                    className={`w-16 h-16 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 ${
-                      activeService === index
-                        ? "bg-gradient-to-br from-amber-500 to-amber-700 scale-110 rotate-6"
-                        : "bg-gradient-to-br from-zinc-800 to-zinc-900"
-                    }`}
-                  >
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-
                   <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
                     {service.title}
                   </h3>
