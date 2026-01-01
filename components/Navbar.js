@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import {
@@ -13,14 +14,12 @@ import {
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-const navLinks = [
+  const navLinks = [
     { title: "Home", href: "/" },
     { title: "Products", href: "/products" },
     { title: "Services", href: "/#services" },
-    { title: "Gallery", href: "/#gallery" },
+    { title: "Special Offers", href: "/#offers" },
     { title: "Cart", href: "/cart" },
-    { title: "Blog", href: "/blog" },
-    { title: "Contact", href: "/#contact" },
     { title: "About Us", href: "/#about" },
   ];
 
@@ -45,17 +44,27 @@ const navLinks = [
   }, []);
 
   return (
-    <nav className="bg-zinc-900 text-amber-600 shadow-lg">
+    <nav className="bg-indigo-700 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between py-6 min-h-[80px]">
           <div className="flex items-center gap-3 w-full justify-center text-center">
+            <div className="w-16 h-16 relative">
+              <Image
+                src="/logo.png"
+                alt="IT Point Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+
             <div className="text-center">
-              <h1 className="text-4xl font-extrabold tracking-wider text-amber-600 font-serif">
-                COMPUTER SHOP
+              <h1 className="text-4xl font-extrabold tracking-wider text-white font-serif">
+                IT POINT COMPUTER SHOP
               </h1>
 
-              <p className="text-xl font-semibold italic text-amber-600 font-serif drop-shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
-                Your Technology Partner
+              <p className="text-xl font-semibold italic text-white font-serif drop-shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+                Solutions That You Need
               </p>
             </div>
           </div>
