@@ -15,10 +15,11 @@ export default function Navbar() {
 
   const navLinks = [
     { title: "होम", href: "/" },
-    { title: "उत्पाद", href: "/products" },    
+    { title: "उत्पाद", href: "/products" },  
+    { title: "स्पेशल ऑफर्स", href: "/offers" },  
     { title: "मरम्मत सेवाएं", href: "/repair-services" }, 
-    { title: "AMC प्लान्स", href: "/amc-plans" },
-    { title: "CCTV सेवाएं", href: "/cctv-services" },
+    { title: "सालाना देखरेख", href: "/amc-plans" },
+    { title: "CCTV इंस्टालेशन", href: "/cctv-इंस्टालेशन" },
     { title: "कार्ट", href: "/cart" },  
     { title: "संपर्क करें", href: "/contact" },
   ];
