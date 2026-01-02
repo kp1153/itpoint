@@ -41,7 +41,7 @@ export const metadata = {
     title: "IT Services Point - Varanasi's Trusted Computer Shop",
     description:
       "Life extension of your PC. Expert laptop repair, desktop sales, CCTV, printer services in Varanasi. Located at Orderly Bazar, Kachahari Road.",
-    url: "https://itservicespoint.in",
+    url: "https://www.itservicespoint.com/",
     siteName: "IT Services Point Varanasi",
     locale: "en_IN",
     type: "website",
@@ -75,7 +75,7 @@ export default function RootLayout({ children }) {
               name: "IT Services Point",
               description: "Life extension of your PC",
               telephone: "+919335833783",
-              email: "it.services.point2174@gmail.com",
+              email: "itservices0607@gmail.com",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "S6/119 In front of Chaura Mata Mandir, Kachahari Road",

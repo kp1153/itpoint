@@ -31,7 +31,7 @@ export default function Footer() {
               <p>📞 9335833783</p>
               <p>📱 7905838004</p>
               <p>📱 9889868627</p>
-              <p>✉️ it.services.point2174@gmail.com</p>
+              <p>✉️ itservices0607@gmail.com</p>
               <p className="mt-3">
                 📍 S6/119 In front of Chaura Mata Mandir,<br />
                 Kachahari Road, Orderly Bazar, Varanasi
