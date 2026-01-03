@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   Wrench,
@@ -82,18 +84,23 @@ export default function ServicesSection() {
     },
   ];
 
-  // Gallery images from public/services/
-  const galleryImages = Array.from({ length: 10 }, (_, i) => {
-    const num = i + 1;
-    // Try different extensions
-    const extensions = ['png', 'jpg', 'jpeg'];
-    return `/services/${num}.${extensions[0]}`; // Default to .png, will work with any
-  });
+  // Exact image extensions - तुम्हारे बताए अनुसार
+const galleryImages = [
+  "/services/1.jpg",    // Image 1: Printer repair
+  "/services/2.png",    // Image 2: IT equipment (PNG transparent)
+  "/services/3.png",    // Image 3: Printer repair cartoon
+  "/services/4.png",    // Image 4: CCTV installation collage
+  "/services/5.png",    // Image 5: Printer repair close-up
+  "/services/6.jpg",    // Image 6: Laptop repair
+  "/services/7.jpg",    // Image 7: CPU/Gaming PC
+  "/services/8.jpg",    // Image 8: Computer repair desk
+  "/services/9.jpg",    // Image 9: Laptop opened
+  "/services/10.jpg",   // Image 10: Motherboard in hands
+];
 
   return (
     <section id="services" className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-gray-900 mb-4">
             हमारी <span className="text-indigo-600">सेवाएं</span>
@@ -105,7 +112,6 @@ export default function ServicesSection() {
           <div className="w-24 h-1.5 bg-indigo-600 mx-auto rounded-full"></div>
         </div>
 
-        {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -140,7 +146,6 @@ export default function ServicesSection() {
           })}
         </div>
 
-        {/* Photo Gallery Section */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-gray-900 text-center mb-8">
             📸 हमारे काम की झलकियाँ
@@ -156,15 +161,6 @@ export default function ServicesSection() {
                   src={src}
                   alt={`Service ${index + 1}`}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    // Fallback: try different extensions
-                    const extensions = ['png', 'jpg', 'jpeg'];
-                    const currentExt = e.target.src.split('.').pop();
-                    const currentIndex = extensions.indexOf(currentExt);
-                    if (currentIndex < extensions.length - 1) {
-                      e.target.src = `/services/${index + 1}.${extensions[currentIndex + 1]}`;
-                    }
-                  }}
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                   <span className="text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -176,7 +172,6 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        {/* Image Modal */}
         {selectedImage && (
           <div
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
@@ -197,7 +192,6 @@ export default function ServicesSection() {
           </div>
         )}
 
-        {/* Why Choose Us */}
         <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 rounded-3xl p-10 shadow-2xl mb-12">
           <h3 className="text-3xl font-bold text-white text-center mb-8">
             ⭐ हमें क्यों चुनें?
@@ -218,7 +212,6 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-amber-50 to-orange-50 p-10 rounded-3xl border-2 border-amber-200">
           <Phone className="w-12 h-12 text-indigo-600 mx-auto mb-4" />
           <h3 className="text-3xl font-bold text-gray-900 mb-4">
