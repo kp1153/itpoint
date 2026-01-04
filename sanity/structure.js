@@ -1,7 +1,7 @@
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure = (S) =>
   S.list()
-    .title("IT Point Computer Shop")
+    .title("आईटी सर्विसेस प्वाइंट")
     .items([
       S.documentTypeListItem("category").title("📂 Categories"),
       S.documentTypeListItem("product").title("📦 Products"),
