@@ -19,7 +19,7 @@ export default function Navbar() {
     { title: "स्पेशल ऑफर्स", href: "/offers" },  
     { title: "मरम्मत सेवाएं", href: "/repair-services" }, 
     { title: "सालाना देखरेख", href: "/amc-plans" },
-    { title: "CCTV इंस्टालेशन", href: "/cctv-इंस्टालेशन" },
+   { title: "CCTV इंस्टालेशन", href: "/cctv-installation" }, // ✅ सही
     { title: "कार्ट", href: "/cart" },  
     { title: "संपर्क करें", href: "/contact" },
   ];
