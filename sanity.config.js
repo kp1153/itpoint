@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * This configuration is used to for the Sanity Studio that’s mounted on the `\app\studio\[[...tool]]\page.jsx` route
+ * This configuration is used to for the Sanity Studio that's mounted on the `\app\studio\[[...tool]]\page.jsx` route
  */
 
 import {visionTool} from '@sanity/vision'
@@ -15,6 +15,7 @@ import {structure} from './sanity/structure'
 
 export default defineConfig({
   basePath: '/studio',
+  title: 'आईटी सर्विसेस प्वाइंट',  // ← यह line add करें
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
