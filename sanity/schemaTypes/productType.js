@@ -26,11 +26,11 @@ function MultiCloudinaryInput(props) {
         try {
           const formData = new FormData();
           formData.append("file", file);
-          formData.append("upload_preset", "itpoint");
+          formData.append("upload_preset", "itservicepoint");
           formData.append("folder", "products");
 
           const response = await fetch(
-            `https://api.cloudinary.com/v1_1/dqewyfjpl/image/upload`,
+            `https://api.cloudinary.com/v1_1/dkawy6aid/image/upload`,
             {
               method: "POST",
               body: formData,
