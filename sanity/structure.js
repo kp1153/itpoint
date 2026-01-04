@@ -2,6 +2,7 @@
 export const structure = (S) =>
   S.list()
     .title("आईटी सर्विसेस प्वाइंट")
+    .id("root")
     .items([
       S.documentTypeListItem("category").title("📂 Categories"),
       S.documentTypeListItem("product").title("📦 Products"),
