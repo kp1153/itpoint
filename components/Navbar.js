@@ -25,13 +25,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-slate-700 text-amber-600 shadow-lg">
+    <nav className="bg-slate-700 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between py-6 min-h-[80px]">
           <div className="flex items-center gap-3 w-full justify-center text-center">
             <div className="text-center">
-              <h1 className="text-4xl font-extrabold tracking-wider text-amber-600 font-serif">
-                IT SERVICES POINT
+              <h1 className="text-4xl font-extrabold tracking-wider text-white font-serif">
+                आईटी सर्विसेस प्वाइंट
               </h1>
             </div>
           </div>
