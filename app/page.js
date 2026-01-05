@@ -1,15 +1,17 @@
-"use client";
-
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
+import OffersSection from "@/components/OffersSection";
+import AboutSection from "@/components/AboutSection";
+import ProductsSection from "@/components/ProductsSection";
 
-export default function Page() {
+export default function HomePage() {
   return (
-    <main>
+    <>
       <HeroSection />
-      <AboutSection />
       <ServicesSection />
-    </main>
+      <OffersSection />
+      <AboutSection />
+      <ProductsSection />
+    </>
   );
 }
