@@ -43,8 +43,15 @@ export const metadata = {
       "Life extension of your PC. Expert laptop repair, desktop sales, CCTV, printer services in Varanasi. Located at Orderly Bazar, Kachahari Road.",
     url: "https://www.itservicespoint.com/",
     siteName: "IT Services Point Varanasi",
+    images: ["https://www.itservicespoint.com/og-image.jpg"],
     locale: "en_IN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IT Services Point Varanasi",
+    description: "Life extension of your PC. Computer repair & sales.",
+    images: ["https://www.itservicespoint.com/og-image.jpg"],
   },
   robots: {
     index: true,
